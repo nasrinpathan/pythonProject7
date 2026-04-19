@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Jinja in Browser</title>
+
+  <!-- Nunjucks CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/3.2.4/nunjucks.min.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    // Jinja-style template
+    const template = `
+      <h1>Hello {{ name }}</h1>
+
+      <ul>
+      {% for item in items %}
+           <li><a href="/page/{{ item }}.html">{{ item }}</a></li>
+      {% endfor %}
+      </ul>
+    `;
+
+    // Data context
+    const context = {
+      name: "Numbers",
+      items: ["one", "two", "three"]
+    };
+
+    // Render into DOM
+    const html = nunjucks.renderString(template, context);
+    document.getElementById("app").innerHTML = html;
+  </script>
+</body>
+</html>
